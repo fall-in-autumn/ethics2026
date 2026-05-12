@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>열네 살 자서전 포트폴리오 - 도덕 수행평가</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #f472b6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .font-gaegu { font-family: 'Gaegu', cursive; }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(8px);
+        }
+
+        .step-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .step-transition:hover {
+            transform: translateY(-4px);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, rgba(244, 114, 182, 0.1) 100%);
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* 메인 버튼 크기 고정 및 폰트 변경 (의리T 요청: 가구체 적용) */
+        .main-step-btn {
+            width: 100%;
+            height: 64px; 
+            flex-shrink: 0;
+            font-family: 'Gaegu', cursive;
+            letter-spacing: -0.02em;
+        }
+        @media (min-width: 768px) {
+            .main-step-btn {
+                width: 160px;
+            }
+        }
+
+        /* 보조 버튼 컨테이너 */
+        .sub-btn-container {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 0.5rem;
+            width: 100%;
+            justify-content: flex-start;
+        }
+        
+        /* 보조 버튼 스타일 확대 (의리T 요청 반영) */
+        .sub-btn {
+            white-space: nowrap;
+            flex: 1 1 auto;
+            min-width: 0;
+            text-align: center;
+            padding-top: 0.85rem; /* 상하 크기 확대 */
+            padding-bottom: 0.85rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            font-size: 0.875rem; /* 14px로 약간 확대 */
+            font-weight: 600;
+        }
+
+        @media (max-width: 767px) {
+            .sub-btn-container {
+                flex-wrap: wrap;
+            }
+            .sub-btn {
+                flex: 1 1 calc(50% - 0.5rem);
+            }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 relative">
+
+    <div class="blob" style="top: -100px; right: -100px;"></div>
+    <div class="blob" style="bottom: -100px; left: -100px;"></div>
+
+    <header class="max-w-4xl mx-auto text-center mb-16 pt-12 floating text-gray-800">
+        <div class="inline-block bg-white/80 backdrop-blur-sm px-6 py-2 rounded-full mb-4 shadow-sm border border-indigo-100">
+            <span class="text-indigo-500 font-bold text-sm">🏫 함께 도덕 수행평가</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-gaegu font-bold mb-6 drop-shadow-sm">
+            열네 살 자서전 포트폴리오
+        </h1>
+        <p class="font-gaegu text-2xl text-gray-600 font-medium tracking-wide">나의 가치를 발견하고 도덕적 성찰을 기록하는 여정</p>
+    </header>
+
+    <main class="max-w-4xl mx-auto space-y-10 relative z-10 font-sans">
+
+        <!-- 1. 수행평가 단계와 활동 카드 -->
+        <section class="bg-white/70 rounded-[2.5rem] p-8 md:p-10 card-shadow border border-white/50">
+            <div class="flex items-center mb-10">
+                <div class="bg-indigo-100 p-3 rounded-2xl mr-4 shadow-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">수행평가 단계와 활동</h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- 1단계 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 p-5 rounded-3xl bg-white/40 border border-indigo-50 step-transition shadow-sm overflow-hidden">
+                    <button class="main-step-btn px-4 bg-indigo-500 text-white rounded-2xl font-bold shadow-lg hover:bg-indigo-600 transition-all text-2xl">
+                        1. 생각쓰기
+                    </button>
+                    <div class="hidden md:block text-indigo-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                    <div class="sub-btn-container md:flex-1">
+                        <button onclick="showDetail('도덕 이야기')" class="sub-btn bg-white text-indigo-600 border border-indigo-100 rounded-full hover:border-indigo-300 hover:shadow-md transition-all">
+                            📖 도덕 이야기
+                        </button>
+                        <button onclick="showDetail('행복 이야기')" class="sub-btn bg-white text-indigo-600 border border-indigo-100 rounded-full hover:border-indigo-300 hover:shadow-md transition-all">
+                            🍀 행복 이야기
+                        </button>
+                        <button onclick="showDetail('자아 이야기')" class="sub-btn bg-white text-indigo-600 border border-indigo-100 rounded-full hover:border-indigo-300 hover:shadow-md transition-all">
+                            👤 자아 이야기
+                        </button>
+                        <button onclick="showDetail('우정 이야기')" class="sub-btn bg-white text-indigo-600 border border-indigo-100 rounded-full hover:border-indigo-300 hover:shadow-md transition-all">
+                            🤝 우정 이야기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2단계 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 p-5 rounded-3xl bg-white/40 border border-purple-50 step-transition shadow-sm overflow-hidden">
+                    <button class="main-step-btn px-4 bg-purple-500 text-white rounded-2xl font-bold shadow-lg hover:bg-purple-600 transition-all text-2xl">
+                        2. 토론하기
+                    </button>
+                    <div class="hidden md:block text-purple-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                    <div class="sub-btn-container md:flex-1">
+                        <button onclick="showDetail('토론 준비하기')" class="sub-btn bg-white text-purple-600 border border-purple-100 rounded-full hover:border-purple-300 hover:shadow-md transition-all">
+                            🗣️ 토론 준비하기
+                        </button>
+                        <button onclick="showDetail('토론하기')" class="sub-btn bg-white text-purple-600 border border-purple-100 rounded-full hover:border-purple-300 hover:shadow-md transition-all">
+                            🎤 토론하기
+                        </button>
+                        <button onclick="showDetail('동료평가하기')" class="sub-btn bg-white text-purple-600 border border-purple-100 rounded-full hover:border-purple-300 hover:shadow-md transition-all">
+                            📋 동료평가하기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3단계 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 p-5 rounded-3xl bg-white/40 border border-pink-50 step-transition shadow-sm overflow-hidden">
+                    <button class="main-step-btn px-4 bg-pink-500 text-white rounded-2xl font-bold shadow-lg hover:bg-pink-600 transition-all text-2xl">
+                        3. 생각 정리
+                    </button>
+                    <div class="hidden md:block text-pink-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                    <div class="sub-btn-container md:flex-1">
+                        <button onclick="showDetail('자료조사')" class="sub-btn bg-white text-pink-600 border border-pink-100 rounded-full hover:border-pink-300 hover:shadow-md transition-all">
+                            🔍 자료조사
+                        </button>
+                        <button onclick="showDetail('논술문 작성')" class="sub-btn bg-white text-pink-600 border border-pink-100 rounded-full hover:border-pink-300 hover:shadow-md transition-all">
+                            ✍️ 논술문 작성
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 수행평가 채점 기준표 카드 -->
+        <section class="bg-white/70 rounded-[2.5rem] p-8 md:p-10 card-shadow border border-white/50">
+            <div class="flex items-center mb-10">
+                <div class="bg-amber-100 p-3 rounded-2xl mr-4 shadow-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">수행평가 채점 기준표</h2>
+            </div>
+
+            <div class="space-y-12">
+                <!-- 채점 기준표 단계별 내용 (이전 버전 유지) -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 bg-indigo-500 text-white rounded-lg text-xs font-bold">1단계</span>
+                        <h3 class="text-lg font-bold text-gray-700">생각 쓰기</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="p-4 rounded-2xl border-2 border-amber-400 bg-amber-50 shadow-md transform scale-[1.02]">
+                            <div class="font-bold text-amber-700 mb-2 flex items-center gap-1">✨ 상 (추천!)</div>
+                            <p class="text-sm text-gray-800 leading-relaxed font-semibold">도덕적 주제를 명확히 이해하고, 자기 생각을 도덕적 관점에서 성의 있고 구체적으로 작성함.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-gray-200 bg-white/50">
+                            <div class="font-bold text-gray-500 mb-2">중</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">도덕적 주제를 이해하고 자기 생각을 도덕적 관점에서 작성함.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-gray-200 bg-white/50">
+                            <div class="font-bold text-gray-500 mb-2">하</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">자기 생각을 도덕적 관점에서 작성하지 못하거나 내용이 미흡함.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 bg-purple-500 text-white rounded-lg text-xs font-bold">2단계</span>
+                        <h3 class="text-lg font-bold text-gray-700">토론하기</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="p-4 rounded-2xl border-2 border-amber-400 bg-amber-50 shadow-md transform scale-[1.02]">
+                            <div class="font-bold text-amber-700 mb-2 flex items-center gap-1">✨ 상 (추천!)</div>
+                            <p class="text-sm text-gray-800 leading-relaxed font-semibold">자기 의견을 논리적·자신 있게 발표하고, 타인의 의견을 경청하는 태도가 매우 훌륭함.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-gray-200 bg-white/50">
+                            <div class="font-bold text-gray-500 mb-2">중</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">자기 의견을 도덕적 관점에서 발표하고, 타인의 의견을 경청함.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-gray-200 bg-white/50">
+                            <div class="font-bold text-gray-500 mb-2">하</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">의견 발표가 미흡하고, 타인의 의견을 경청하는 자세가 부족함.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 bg-pink-500 text-white rounded-lg text-xs font-bold">3단계</span>
+                        <h3 class="text-lg font-bold text-gray-700">생각 정리하기</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="p-4 rounded-2xl border-2 border-amber-400 bg-amber-50 shadow-md transform scale-[1.02]">
+                            <div class="font-bold text-amber-700 mb-2 flex items-center gap-1">✨ 상 (추천!)</div>
+                            <p class="text-sm text-gray-800 leading-relaxed font-semibold">자기 의견을 논리적·구체적으로 작성하며, 포트폴리오를 <span class="underline text-red-500 decoration-red-300">80% 이상</span> 완벽하게 완성함.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-gray-200 bg-white/50">
+                            <div class="font-bold text-gray-500 mb-2">중</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">자기 의견을 도덕적 관점에서 작성하며, 포트폴리오를 60% 이상 완성함.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-gray-200 bg-white/50">
+                            <div class="font-bold text-gray-500 mb-2">하</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">의견 작성이 미흡하거나, 포트폴리오 완성도가 60% 미만임.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 포트폴리오 달성도 -->
+                <div class="pt-8 border-t border-gray-200/50">
+                    <div class="bg-indigo-50/80 rounded-3xl p-6 border border-indigo-200 shadow-sm transition-all">
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div class="space-y-2 text-center md:text-left">
+                                <div class="flex items-center justify-center md:justify-start gap-2">
+                                    <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-indigo-900">포트폴리오 달성도 확인하기</h3>
+                                </div>
+                                <div class="pl-0 md:pl-11">
+                                    <p class="text-sm text-indigo-700 font-bold">도장판에 있는 도장 개수를 입력하세요.</p>
+                                    <p class="text-[11px] text-indigo-400 mt-1 font-medium">※ 포트폴리오 완성 기준(상)은 달성률 80% 이상입니다.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-6 bg-white px-8 py-5 rounded-2xl shadow-md border border-indigo-100 min-w-[300px] justify-center transform hover:scale-[1.02] transition-transform">
+                                <div class="flex flex-col items-center justify-center h-full">
+                                    <span class="text-[11px] text-gray-400 font-bold mb-2">나의 도장 개수</span>
+                                    <div class="flex items-center gap-2">
+                                        <input type="number" id="stamp-count" min="0" max="15" placeholder="0" oninput="calculateProgress(this.value)" 
+                                               class="w-14 h-12 text-center text-2xl font-black text-indigo-600 focus:ring-4 focus:ring-indigo-100 focus:outline-none bg-indigo-50/50 rounded-xl border-2 border-indigo-100">
+                                        <span class="text-sm text-indigo-300 font-bold">/ 15</span>
+                                    </div>
+                                </div>
+                                <div class="w-px h-12 bg-gray-100 self-center mt-4"></div>
+                                <div class="flex flex-col items-center justify-center h-full">
+                                    <span class="text-[11px] text-gray-400 font-bold mb-2">달성률</span>
+                                    <div class="h-12 flex items-center">
+                                        <span id="progress-result" class="text-3xl font-black text-pink-500 transition-all duration-300 leading-none">0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 토스트 알림 -->
+    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-900/90 backdrop-blur-md text-white px-8 py-4 rounded-2xl shadow-2xl opacity-0 transition-all duration-300 pointer-events-none z-50 border border-white/20">
+        <span id="toast-message" class="flex items-center gap-2 font-medium"></span>
+    </div>
+
+    <footer class="mt-24 pb-12 text-center text-gray-400 font-gaegu text-xl">
+        <p>© 2026 의리T와 함께 도덕 | 함께 성장하는 즐거움 🌱</p>
+    </footer>
+
+    <script>
+        function showDetail(activityName) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            
+            toastMsg.innerHTML = `✨ <strong>'${activityName}'</strong> 활동을 시작해볼까요?`;
+            toast.classList.remove('opacity-0', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-4');
+            }, 2300);
+        }
+
+        function calculateProgress(val) {
+            const resultDisplay = document.getElementById('progress-result');
+            const numVal = parseFloat(val);
+            
+            if (isNaN(numVal) || numVal < 0) {
+                resultDisplay.innerText = '0%';
+                resultDisplay.style.transform = 'scale(1)';
+                return;
+            }
+            
+            const progress = Math.min(Math.round((numVal / 15) * 100), 100);
+            resultDisplay.innerText = progress + '%';
+            
+            if (progress >= 80) {
+                resultDisplay.classList.remove('text-pink-500');
+                resultDisplay.classList.add('text-indigo-600');
+                resultDisplay.style.transform = 'scale(1.25)';
+            } else {
+                resultDisplay.classList.add('text-pink-500');
+                resultDisplay.classList.remove('text-indigo-600');
+                resultDisplay.style.transform = 'scale(1)';
+            }
+        }
+    </script>
+</body>
+</html>
