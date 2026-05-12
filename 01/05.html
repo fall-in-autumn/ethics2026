@@ -1,0 +1,956 @@
+<!-- =========================
+의리T와 함께하는 도덕 토론 발전소
+최종 통합 버전
+========================= -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>의리T와 함께하는 도덕 토론 발전소</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+/>
+
+<style>
+
+body{
+  font-family:'Pretendard',sans-serif;
+  background:#f8fafc;
+}
+
+.seat-badge{
+  animation:pop .3s ease;
+}
+
+@keyframes pop{
+  from{
+    opacity:0;
+    transform:scale(.7);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+.flip-wrap{
+  perspective:1000px;
+}
+
+.flip-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  transition:transform .8s;
+  transform-style:preserve-3d;
+}
+
+.flip-inner.active{
+  transform:rotateY(180deg);
+}
+
+.flip-front,
+.flip-back{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  border-radius:2rem;
+}
+
+.flip-back{
+  transform:rotateY(180deg);
+}
+
+</style>
+</head>
+
+<body class="pb-24">
+
+<!-- =========================
+HEADER
+========================= -->
+
+<header class="bg-white shadow sticky top-0 z-50">
+
+<div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+
+<div class="flex items-center gap-4">
+
+<div class="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center text-white text-2xl">
+<i class="fa-solid fa-scale-balanced"></i>
+</div>
+
+<div>
+<h1 class="text-3xl font-black text-indigo-700">
+의리T와 함께하는 도덕 토론 발전소
+</h1>
+
+<p class="text-slate-500 font-bold mt-1">
+논리와 경청으로 성장하는 토론 교실
+</p>
+</div>
+
+</div>
+
+<button
+id="adminBtn"
+class="w-12 h-12 rounded-full hover:bg-slate-100"
+>
+<i class="fa-solid fa-gear text-xl text-slate-600"></i>
+</button>
+
+</div>
+</header>
+
+<!-- =========================
+학생 로그인
+========================= -->
+
+<section
+id="loginSection"
+class="max-w-xl mx-auto mt-14 bg-white rounded-[2rem] shadow-xl p-10"
+>
+
+<h2 class="text-3xl font-black text-center mb-8">
+학생 로그인
+</h2>
+
+<div class="space-y-5">
+
+<input
+id="loginName"
+type="text"
+placeholder="이름 입력"
+class="w-full rounded-2xl border p-5 text-lg"
+/>
+
+<input
+id="loginCode"
+type="password"
+placeholder="고유번호 입력"
+class="w-full rounded-2xl border p-5 text-lg"
+/>
+
+<button
+onclick="studentLogin()"
+class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-5 rounded-2xl text-xl font-black"
+>
+로그인하기
+</button>
+
+</div>
+
+</section>
+
+<!-- =========================
+메인 콘텐츠
+========================= -->
+
+<main
+id="mainContent"
+class="hidden max-w-7xl mx-auto px-4 mt-10 space-y-20"
+>
+
+<!-- 환영 -->
+
+<div class="bg-indigo-600 text-white rounded-3xl p-8 text-center">
+
+<h2
+id="welcomeText"
+class="text-3xl font-black"
+>
+환영합니다
+</h2>
+
+</div>
+
+<!-- =========================
+토론 역할
+========================= -->
+
+<section>
+
+<h2 class="text-3xl font-black mb-8">
+토론 역할 탐색
+</h2>
+
+<div class="grid lg:grid-cols-3 gap-8">
+
+<!-- 찬성 -->
+
+<div class="flip-wrap h-80 cursor-pointer">
+
+<div class="flip-inner">
+
+<div class="flip-front bg-blue-600 text-white p-8 flex flex-col justify-center items-center">
+
+<i class="fa-solid fa-thumbs-up text-5xl mb-5"></i>
+
+<h3 class="text-3xl font-black">
+찬성 팀
+</h3>
+
+</div>
+
+<div class="flip-back bg-white border-4 border-blue-500 p-8">
+
+<h3 class="font-black text-2xl text-blue-700 mb-5">
+세부 역할
+</h3>
+
+<div class="space-y-3 font-bold">
+<div>✅ 입론 담당</div>
+<div>✅ 교차조사 담당</div>
+<div>✅ 반론 담당</div>
+<div>✅ 자료조사 담당</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- 반대 -->
+
+<div class="flip-wrap h-80 cursor-pointer">
+
+<div class="flip-inner">
+
+<div class="flip-front bg-rose-600 text-white p-8 flex flex-col justify-center items-center">
+
+<i class="fa-solid fa-thumbs-down text-5xl mb-5"></i>
+
+<h3 class="text-3xl font-black">
+반대 팀
+</h3>
+
+</div>
+
+<div class="flip-back bg-white border-4 border-rose-500 p-8">
+
+<h3 class="font-black text-2xl text-rose-700 mb-5">
+세부 역할
+</h3>
+
+<div class="space-y-3 font-bold">
+<div>✅ 입론 담당</div>
+<div>✅ 교차조사 담당</div>
+<div>✅ 반론 담당</div>
+<div>✅ 자료조사 담당</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- 판정단 -->
+
+<div class="flip-wrap h-80 cursor-pointer">
+
+<div class="flip-inner">
+
+<div class="flip-front bg-amber-500 text-white p-8 flex flex-col justify-center items-center">
+
+<i class="fa-solid fa-scale-balanced text-5xl mb-5"></i>
+
+<h3 class="text-3xl font-black">
+판정단
+</h3>
+
+</div>
+
+<div class="flip-back bg-white border-4 border-amber-500 p-8">
+
+<h3 class="font-black text-2xl text-amber-700 mb-5">
+세부 역할
+</h3>
+
+<div class="space-y-3 font-bold">
+<div>✅ 토론 태도 평가</div>
+<div>✅ 핵심 주장 정리</div>
+<div>✅ 최종 판정 발표</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+신청 폼
+========================= -->
+
+<section>
+
+<div
+id="formSection"
+class="bg-white rounded-[3rem] shadow-xl p-10"
+>
+
+<h2 class="text-3xl font-black mb-8">
+토론 역할 신청
+</h2>
+
+<div class="grid lg:grid-cols-3 gap-6 mb-8">
+
+<select
+id="role1"
+onchange="updateRoleOptions()"
+class="rounded-2xl border p-5 font-bold"
+>
+<option value="">1지망 선택</option>
+<option value="찬성">찬성</option>
+<option value="반대">반대</option>
+<option value="판정단">판정단</option>
+</select>
+
+<select
+id="role2"
+onchange="updateRoleOptions()"
+class="rounded-2xl border p-5 font-bold"
+>
+<option value="">2지망 선택</option>
+<option value="찬성">찬성</option>
+<option value="반대">반대</option>
+<option value="판정단">판정단</option>
+</select>
+
+<select
+id="role3"
+onchange="updateRoleOptions()"
+class="rounded-2xl border p-5 font-bold"
+>
+<option value="">3지망 선택</option>
+<option value="찬성">찬성</option>
+<option value="반대">반대</option>
+<option value="판정단">판정단</option>
+</select>
+
+</div>
+
+<button
+onclick="submitApplication()"
+class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-5 rounded-2xl text-xl font-black"
+>
+참가 신청하기 🚀
+</button>
+
+</div>
+
+<!-- 신청 완료 -->
+
+<div
+id="successBox"
+class="hidden bg-emerald-500 text-white rounded-[3rem] p-14 text-center shadow-2xl"
+>
+
+<i class="fa-solid fa-circle-check text-7xl mb-6"></i>
+
+<h2 class="text-4xl font-black mb-4">
+신청 완료!
+</h2>
+
+<p class="text-xl font-bold">
+의리T가 모둠을 배정하고 있어요 😊
+</p>
+
+</div>
+
+</section>
+
+<!-- =========================
+배치도
+========================= -->
+
+<section>
+
+<h2 class="text-3xl font-black mb-8">
+토론 모둠 배치도
+</h2>
+
+<div class="bg-slate-900 rounded-[4rem] p-10">
+
+<div class="w-52 bg-white rounded-b-3xl mx-auto py-4 text-center font-black text-xl mb-16">
+칠판
+</div>
+
+<div class="grid lg:grid-cols-[1fr_300px_1fr] gap-10">
+
+<!-- 찬성 -->
+
+<div>
+
+<div class="bg-blue-500/20 text-blue-300 py-4 rounded-2xl text-center font-black text-xl mb-6">
+👍 찬성 팀 진영
+</div>
+
+<div class="space-y-4">
+
+<div class="bg-white/10 rounded-2xl min-h-[100px] p-4">
+<div id="agree1" class="flex flex-wrap gap-3"></div>
+</div>
+
+<div class="bg-white/10 rounded-2xl min-h-[100px] p-4">
+<div id="agree2" class="flex flex-wrap gap-3"></div>
+</div>
+
+<div class="bg-white/10 rounded-2xl min-h-[100px] p-4">
+<div id="agree3" class="flex flex-wrap gap-3"></div>
+</div>
+
+</div>
+
+</div>
+
+<!-- 중앙 통로 -->
+
+<div class="hidden lg:flex items-center justify-center">
+
+<div class="text-center text-slate-400 font-black text-xl leading-relaxed">
+교실 중앙 통로
+<br><br>
+서로 마주보며 토론!
+</div>
+
+</div>
+
+<!-- 반대 -->
+
+<div>
+
+<div class="bg-rose-500/20 text-rose-300 py-4 rounded-2xl text-center font-black text-xl mb-6">
+👎 반대 팀 진영
+</div>
+
+<div class="space-y-4">
+
+<div class="bg-white/10 rounded-2xl min-h-[100px] p-4">
+<div id="oppose1" class="flex flex-wrap gap-3 justify-end"></div>
+</div>
+
+<div class="bg-white/10 rounded-2xl min-h-[100px] p-4">
+<div id="oppose2" class="flex flex-wrap gap-3 justify-end"></div>
+</div>
+
+<div class="bg-white/10 rounded-2xl min-h-[100px] p-4">
+<div id="oppose3" class="flex flex-wrap gap-3 justify-end"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- 판정단 -->
+
+<div class="mt-16">
+
+<div class="bg-amber-500/20 text-amber-300 py-4 rounded-2xl text-center font-black text-xl mb-6">
+⚖️ 판정단
+</div>
+
+<div
+id="judgeSeat"
+class="bg-white/10 rounded-2xl min-h-[100px] p-4 flex flex-wrap gap-3 items-start"
+>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- =========================
+관리자 모드
+========================= -->
+
+<section
+id="adminPanel"
+class="hidden fixed inset-0 bg-black/50 z-[100] overflow-y-auto"
+>
+
+<div class="max-w-4xl mx-auto my-10 bg-white rounded-[3rem] p-10">
+
+<div class="flex justify-between items-center mb-8">
+
+<h2 class="text-3xl font-black">
+의리T 관리 모드
+</h2>
+
+<button
+onclick="closeAdmin()"
+class="text-rose-500 font-black"
+>
+닫기
+</button>
+
+</div>
+
+<div
+id="applicationList"
+class="space-y-5"
+>
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+관리자 비밀번호
+========================= -->
+
+<div
+id="pwModal"
+class="hidden fixed inset-0 bg-black/50 z-[200] flex items-center justify-center"
+>
+
+<div class="bg-white rounded-[3rem] p-10 w-full max-w-md">
+
+<h2 class="text-3xl font-black text-center mb-8">
+관리자 로그인
+</h2>
+
+<input
+id="pwInput"
+type="password"
+placeholder="비밀번호 입력"
+class="w-full border rounded-2xl p-5 mb-6"
+/>
+
+<button
+onclick="adminLogin()"
+class="w-full bg-indigo-600 text-white py-5 rounded-2xl text-xl font-black"
+>
+로그인
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* =========================
+APPS SCRIPT URL
+========================= */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyirqUsis6XfV9ABGUHAhacoygyIzhURcCnxTjFJhUGIRb537M6rTEl-vsg05CyxabC/exec";
+
+/* =========================
+학생 데이터
+========================= */
+
+const students = [
+
+{name:"김민준",code:"1001"},
+{name:"이서연",code:"1002"},
+{name:"박지후",code:"1003"},
+{name:"최하린",code:"1004"}
+
+];
+
+/* =========================
+STATE
+========================= */
+
+let currentStudent = null;
+let applications = [];
+let isAdmin = false;
+
+/* =========================
+카드 뒤집기
+========================= */
+
+document.querySelectorAll(".flip-wrap").forEach(card=>{
+
+card.addEventListener("click",()=>{
+
+card.querySelector(".flip-inner")
+.classList.toggle("active");
+
+});
+
+});
+
+/* =========================
+학생 로그인
+========================= */
+
+function studentLogin(){
+
+const name =
+document.getElementById("loginName").value.trim();
+
+const code =
+document.getElementById("loginCode").value.trim();
+
+const student =
+students.find(s=>
+s.name===name && s.code===code
+);
+
+if(!student){
+
+alert("이름 또는 고유번호가 올바르지 않습니다.");
+return;
+
+}
+
+currentStudent = student;
+
+document.getElementById("loginSection")
+.classList.add("hidden");
+
+document.getElementById("mainContent")
+.classList.remove("hidden");
+
+document.getElementById("welcomeText")
+.innerText =
+`${student.name} 학생 환영합니다 😊`;
+
+}
+
+/* =========================
+중복 선택 방지
+========================= */
+
+function updateRoleOptions(){
+
+const selects = [
+document.getElementById("role1"),
+document.getElementById("role2"),
+document.getElementById("role3")
+];
+
+const values =
+selects.map(s=>s.value).filter(v=>v);
+
+selects.forEach(select=>{
+
+const current = select.value;
+
+Array.from(select.options).forEach(option=>{
+
+if(option.value===""){
+option.disabled=false;
+return;
+}
+
+option.disabled =
+values.includes(option.value)
+&& option.value !== current;
+
+});
+
+});
+
+}
+
+/* =========================
+이미 신청 여부
+========================= */
+
+function alreadyApplied(name){
+
+return applications.some(app =>
+app.name === name
+);
+
+}
+
+/* =========================
+신청
+========================= */
+
+async function submitApplication(){
+
+if(!currentStudent){
+
+alert("로그인이 필요합니다.");
+return;
+
+}
+
+const role1 =
+document.getElementById("role1").value;
+
+const role2 =
+document.getElementById("role2").value;
+
+const role3 =
+document.getElementById("role3").value;
+
+if(!role1 || !role2 || !role3){
+
+alert("모든 지망을 선택해주세요.");
+return;
+
+}
+
+if(alreadyApplied(currentStudent.name)){
+
+alert("이미 신청을 완료했습니다.");
+return;
+
+}
+
+const data = {
+
+name:currentStudent.name,
+code:currentStudent.code,
+role1,
+role2,
+role3
+
+};
+
+applications.push(data);
+
+localStorage.setItem(
+"debateApplied",
+currentStudent.name
+);
+
+await saveToSheet(data);
+
+renderApplications();
+
+document.getElementById("formSection")
+.classList.add("hidden");
+
+document.getElementById("successBox")
+.classList.remove("hidden");
+
+}
+
+/* =========================
+구글시트 저장
+========================= */
+
+async function saveToSheet(data){
+
+try{
+
+await fetch(SCRIPT_URL,{
+
+method:"POST",
+mode:"no-cors",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+type:"application",
+data:data
+})
+
+});
+
+}catch(err){
+
+console.log(err);
+
+}
+
+}
+
+/* =========================
+관리자 신청 목록
+========================= */
+
+function renderApplications(){
+
+const list =
+document.getElementById("applicationList");
+
+list.innerHTML = "";
+
+applications.forEach(app=>{
+
+const div =
+document.createElement("div");
+
+div.className =
+"bg-indigo-50 rounded-3xl p-6";
+
+div.innerHTML = `
+
+<div class="font-black text-2xl mb-4">
+${app.name}
+</div>
+
+<div class="space-y-2 mb-5 font-bold">
+
+<div>1지망 : ${app.role1}</div>
+<div>2지망 : ${app.role2}</div>
+<div>3지망 : ${app.role3}</div>
+
+</div>
+
+<select
+onchange="assignSeat('${app.name}',this.value)"
+class="w-full border rounded-2xl p-4 font-bold"
+>
+
+<option value="">모둠 배정 선택</option>
+
+<option value="agree1">찬성 1모둠</option>
+<option value="agree2">찬성 2모둠</option>
+<option value="agree3">찬성 3모둠</option>
+
+<option value="oppose1">반대 1모둠</option>
+<option value="oppose2">반대 2모둠</option>
+<option value="oppose3">반대 3모둠</option>
+
+<option value="judgeSeat">판정단</option>
+
+</select>
+
+`;
+
+list.appendChild(div);
+
+});
+
+}
+
+/* =========================
+자리 배정
+========================= */
+
+function assignSeat(name,targetId){
+
+if(!targetId) return;
+
+document
+.querySelectorAll(".seat-student")
+.forEach(el=>{
+
+if(el.dataset.name === name){
+
+el.remove();
+
+}
+
+});
+
+const target =
+document.getElementById(targetId);
+
+const badge =
+document.createElement("div");
+
+badge.dataset.name = name;
+
+badge.className =
+"seat-student seat-badge h-[52px] px-5 rounded-xl bg-white text-slate-900 font-black shadow-lg flex items-center";
+
+badge.innerText = name;
+
+target.appendChild(badge);
+
+}
+
+/* =========================
+관리자
+========================= */
+
+document.getElementById("adminBtn")
+.onclick = ()=>{
+
+if(isAdmin){
+
+document.getElementById("adminPanel")
+.classList.remove("hidden");
+
+}else{
+
+document.getElementById("pwModal")
+.classList.remove("hidden");
+
+}
+
+};
+
+function adminLogin(){
+
+const pw =
+document.getElementById("pwInput").value;
+
+if(pw === "1234"){
+
+isAdmin = true;
+
+document.getElementById("pwModal")
+.classList.add("hidden");
+
+document.getElementById("adminPanel")
+.classList.remove("hidden");
+
+}else{
+
+alert("비밀번호가 올바르지 않습니다.");
+
+}
+
+}
+
+function closeAdmin(){
+
+document.getElementById("adminPanel")
+.classList.add("hidden");
+
+}
+
+/* =========================
+새로고침 대응
+========================= */
+
+window.onload = ()=>{
+
+const applied =
+localStorage.getItem("debateApplied");
+
+if(applied){
+
+document.getElementById("formSection")
+.classList.add("hidden");
+
+document.getElementById("successBox")
+.classList.remove("hidden");
+
+}
+
+};
+
+</script>
+
+</body>
+</html>
