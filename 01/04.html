@@ -15,7 +15,6 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            /* 우주 공간 느낌의 딥 블루/퍼플 그라데이션 배경 */
             background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 50%, #020617 100%);
             min-height: 100vh;
             overflow-x: hidden;
@@ -23,7 +22,6 @@
             color: #f8fafc;
         }
 
-        /* 별 가루 효과 */
         body::before {
             content: "";
             position: absolute;
@@ -71,16 +69,6 @@
         .step-card:hover {
             transform: translateY(-8px);
             background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .blob {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(180deg, rgba(99, 102, 241, 0.2) 0%, rgba(14, 165, 233, 0.1) 100%);
-            filter: blur(80px);
-            border-radius: 50%;
-            z-index: -1;
         }
 
         .nav-icon-btn {
@@ -132,30 +120,49 @@
             transform: translateY(-2px);
         }
 
-        #toast {
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* 텍스트 대비 향상 */
         .glass-panel {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        th {
+            background: rgba(99, 102, 241, 0.25);
+            color: #a5b4fc;
+            padding: 16px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        td {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        tr:last-child td { border-bottom: none; }
+        .eval-factor { font-weight: bold; color: #fff; background: rgba(255,255,255,0.05); width: 100px; text-align: center; vertical-align: middle; }
     </style>
 </head>
 <body class="p-4 md:p-8 relative">
 
-    <div class="blob" style="top: -100px; right: -100px;"></div>
-    <div class="blob" style="bottom: -100px; left: -100px;"></div>
+    <div class="absolute top-[-100px] right-[-100px] w-[500px] h-[500px] bg-indigo-600/20 blur-[80px] rounded-full -z-10"></div>
+    <div class="absolute bottom-[-100px] left-[-100px] w-[500px] h-[500px] bg-blue-600/10 blur-[80px] rounded-full -z-10"></div>
 
-    <!-- 네비게이션: fixed를 absolute로 변경하여 스크롤 시 따라오지 않게 함 -->
     <nav class="absolute top-6 left-6 z-50 flex gap-3">
-        <div class="nav-icon-btn shadow-sm" onclick="showToast('메뉴를 준비 중입니다.')">
+        <div class="nav-icon-btn shadow-sm" onclick="showToast('메뉴 기능을 준비 중입니다.')">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
         </div>
-        <!-- 홈 버튼 클릭 시 ./index.html 이동 -->
         <div class="nav-icon-btn shadow-sm" onclick="location.href='./index.html'">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -166,10 +173,6 @@
     <header class="max-w-4xl mx-auto text-center mb-16 pt-12 floating">
         <div class="inline-block bg-indigo-900/40 backdrop-blur-sm px-6 py-2 rounded-full mb-4 shadow-sm border border-indigo-500/30">
             <span class="text-indigo-300 font-bold text-sm flex items-center gap-2">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-400"></span>
-                </span>
                 함께 도덕 수행평가
             </span>
         </div>
@@ -179,7 +182,7 @@
         <p class="font-gaegu text-2xl text-indigo-300 font-medium">인공지능에 도덕의 숨결을 불어넣는 창조적 여정</p>
     </header>
 
-    <main class="max-w-4xl mx-auto space-y-10 relative z-10">
+    <main class="max-w-5xl mx-auto space-y-10 relative z-10">
 
         <!-- 1. 수행평가 단계 -->
         <section class="glass-panel rounded-[2.5rem] p-8 md:p-10 card-shadow">
@@ -196,13 +199,13 @@
                 <!-- 1단계 -->
                 <div class="flex flex-col md:flex-row items-stretch gap-4 p-6 rounded-3xl bg-white/5 border border-white/10 step-card">
                     <div class="main-step-btn px-4 bg-indigo-600 text-white rounded-2xl font-bold shadow-md text-xl md:w-56 shrink-0">
-                        1단계(개별)
+                        1단계
                     </div>
                     <div class="flex flex-col justify-center w-full">
                         <p class="text-base text-indigo-100 font-bold mb-3 px-2">도덕의 필요성을 이해하고, 도덕적 관점에서 도덕 AI 기획하기</p>
                         <div class="flex flex-wrap gap-2">
-                            <button onclick="showMission('도덕의 필요성', '삶에서 도덕이 필요한 이유에 근거하여 도덕적인 삶에 대한 의지를 다집니다.')" class="sub-btn">🤖 필요성 이해</button>
-                            <button onclick="showMission('도덕 AI 기획', '도덕적 인격이 갖추어야 할 특성을 분석하여 AI의 도덕적 원칙을 세웁니다.')" class="sub-btn">📝 AI 기획하기</button>
+                            <button onclick="showMission('도덕의 필요성', '삶에서 도덕이 필요한 이유에 근거하여 도덕의 의미를 정의합니다.')" class="sub-btn">🤖 도덕의 필요성 이해</button>
+                            <button onclick="showMission('도덕 AI 기획', '도덕적 인격이 갖추어야 할 특성을 분석하여 AI의 도덕적 원칙을 세웁니다.')" class="sub-btn">📝 도덕 가이드 작성하기</button>
                         </div>
                     </div>
                 </div>
@@ -210,13 +213,13 @@
                 <!-- 2단계 -->
                 <div class="flex flex-col md:flex-row items-stretch gap-4 p-6 rounded-3xl bg-white/5 border border-white/10 step-card">
                     <div class="main-step-btn px-4 bg-blue-600 text-white rounded-2xl font-bold shadow-md text-xl md:w-56 shrink-0">
-                        2단계(개별+모둠)
+                        2단계
                     </div>
                     <div class="flex flex-col justify-center w-full">
-                        <p class="text-base text-blue-100 font-bold mb-3 px-2">도덕적 관점에서 선정한 문제를 해결할 수 있는 도덕 AI 제작하기</p>
+                        <p class="text-base text-blue-100 font-bold mb-3 px-2">도덕적 문제를 해결할 수 있는 도덕 AI 제작하기</p>
                         <div class="flex flex-wrap gap-2">
-                            <button onclick="showMission('부도덕 원인 분석', '일상 속 부도덕한 행동의 원인을 분석하고 해결 방안을 고민합니다.')" class="sub-btn">🔍 원인 분석</button>
-                            <button onclick="showMission('AI 프로토타입 제작', '도덕적 가치관을 바탕으로 실제 작동하는 도덕 AI 모델을 만듭니다.')" class="sub-btn">🛠️ AI 제작하기</button>
+                            <button onclick="showMission('비도덕적 행동 원인 분석', '일상 속 부도덕한 행동의 원인을 분석하고 해결 방안을 고민합니다.')" class="sub-btn">🔍 비도덕적 행동 원인 분석</button>
+                            <button onclick="showMission('도덕 AI 제작', '도덕적 가치관을 바탕으로 실제 작동하는 도덕 AI를 만듭니다.')" class="sub-btn">🛠️ 도덕 AI 제작하기</button>
                         </div>
                     </div>
                 </div>
@@ -224,100 +227,84 @@
                 <!-- 3단계 -->
                 <div class="flex flex-col md:flex-row items-stretch gap-4 p-6 rounded-3xl bg-white/5 border border-white/10 step-card">
                     <div class="main-step-btn px-4 bg-emerald-600 text-white rounded-2xl font-bold shadow-md text-xl md:w-56 shrink-0">
-                        3단계(개별+모둠)
+                        3단계
                     </div>
                     <div class="flex flex-col justify-center w-full">
                         <p class="text-base text-emerald-100 font-bold mb-3 px-2">도덕 AI 프로젝트 결과 발표 및 동료 평가, 자기 성찰하기</p>
                         <div class="flex flex-wrap gap-2">
                             <button onclick="showMission('결과 발표', '우리 모둠의 AI가 세상을 어떻게 도덕적으로 바꿀 수 있는지 발표합니다.')" class="sub-btn">📢 프로젝트 발표</button>
-                            <button onclick="showMission('성찰 및 평가', '동료 평가를 통해 배우고, 자신의 도덕적 성장을 성찰합니다.')" class="sub-btn">🌿 자기 성찰하기</button>
+                            <button onclick="showMission('성찰 및 평가', '동료 평가를 통해 배우고, 자신의 도덕적 성장을 성찰합니다.')" class="sub-btn">🌿 성찰하기</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 2. 수행평가 채점 기준표 -->
+        <!-- 2. 수행평가 채점기준표 -->
         <section class="glass-panel rounded-[2.5rem] p-8 md:p-10 card-shadow">
             <div class="flex items-center mb-10">
                 <div class="bg-amber-500 p-3 rounded-2xl mr-4 shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
                 </div>
-                <h2 class="text-2xl font-bold text-white">수행평가 채점 기준표</h2>
+                <h2 class="text-2xl font-bold text-white"수행평가 채점기준표</h2>
             </div>
 
-            <div class="grid grid-cols-1 gap-8">
-                <!-- 기획하기 기준 -->
-                <div class="bg-white/5 p-6 rounded-3xl border border-white/10">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-bold text-indigo-300 flex items-center gap-2">
-                            <span class="w-2 h-2 bg-indigo-400 rounded-full"></span>
-                            영역 1: 도덕적 삶의 실천 의지 (1단계)
-                        </h3>
-                        <span class="text-xs bg-indigo-900/50 text-indigo-200 px-2 py-1 rounded-lg font-bold border border-indigo-500/30">배점: 15점</span>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div class="bg-indigo-900/30 p-4 rounded-2xl border border-indigo-500/40">
-                            <div class="text-xs font-black text-indigo-400 mb-1 uppercase">A (15점)</div>
-                            <p class="text-xs text-indigo-100 leading-snug">자신의 삶과 가치관 성찰을 통해 자아를 종합적으로 이해하고 도덕 실천 의지가 매우 강함</p>
-                        </div>
-                        <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
-                            <div class="text-xs font-bold text-gray-400 mb-1 uppercase">B-C (13-11점)</div>
-                            <p class="text-xs text-gray-300 leading-snug">자아를 다양한 측면에서 이해하고 도덕적인 삶을 실천하려는 의지가 있음</p>
-                        </div>
-                        <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
-                            <div class="text-xs font-bold text-gray-400 mb-1 uppercase">D-E (9-7점)</div>
-                            <p class="text-xs text-gray-300 leading-snug">자아를 부분적으로 이해하거나 도덕의 필요성을 찾아보는 단계임</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 제작 및 분석 기준 -->
-                <div class="bg-white/5 p-6 rounded-3xl border border-white/10">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-bold text-blue-300 flex items-center gap-2">
-                            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
-                            영역 2: 부도덕 원인 분석 및 인격 내면화 (2-3단계)
-                        </h3>
-                        <span class="text-xs bg-blue-900/50 text-blue-200 px-2 py-1 rounded-lg font-bold border border-blue-500/30">배점: 15점</span>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div class="bg-blue-900/30 p-4 rounded-2xl border border-blue-500/40">
-                            <div class="text-xs font-black text-blue-400 mb-1 uppercase">A (15점)</div>
-                            <p class="text-xs text-blue-100 leading-snug">부도덕한 행동의 원인을 분석하고 도덕적 인격의 특성을 파악하여 적극적으로 내면화함</p>
-                        </div>
-                        <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
-                            <div class="text-xs font-bold text-gray-400 mb-1 uppercase">B-C (13-11점)</div>
-                            <p class="text-xs text-gray-300 leading-snug">부도덕 원인을 나열하고 도덕적 인격 특성을 파악하여 내면화하려는 의지를 보임</p>
-                        </div>
-                        <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
-                            <div class="text-xs font-bold text-gray-400 mb-1 uppercase">D-E (9-7점)</div>
-                            <p class="text-xs text-gray-300 leading-snug">부도덕 원인을 찾아보거나 인격이 갖추어야 할 특성이 있음을 인지함</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th>평가 단계</th>
+                            <th class="bg-indigo-600/30 text-white">상</th>
+                            <th class="bg-slate-600/30 text-slate-200">중</th>
+                            <th class="bg-amber-800/30 text-amber-200">하</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 1단계 -->
+                        <tr>
+                            <td class="eval-factor">1단계</td>
+                            <td>도덕의 필요성을 이해하고 이를 예로 들어 설명할 수 있으며, 도덕적 관점에서 도덕 AI 제작을 위한 도덕 가이드를 성실히 작성함. </td>
+                            <td>도덕의 필요성을 설명할 수 있으며, 도덕적 관점에서 도덕 AI 제작을 위한 도덕 가이드를 작성함. </td>
+                            <td>도덕 AI 제작을 위한 도덕 가이드를 도덕적 관점에서 작성하지 못하거나, 미흡함.</td>
+                        </tr>
+                        <!-- 2단계 -->
+                        <tr>
+                            <td class="eval-factor">2단계</td>
+                            <td>도덕적 관점에서 창의적이고 완성도 높은 도덕적인 행동을 하는 도덕 AI를 성실히 제작함.</td>
+                            <td>도덕적 관점에서 도덕적인 행동을 하는 도덕 AI를 제작함.</td>
+                            <td>도덕적인 행동을 하는 도덕 AI를 도덕적 관점에서 제작하지 못하거나, 완성도가 미흡함.</td>
+                        </tr>
+                        <!-- 3단계 -->
+                        <tr>
+                            <td class="eval-factor">3단계</td>
+                            <td>도덕적 관점에서 도덕 AI를 구체적으로 소개하고, 조건에 맞추어 자신 있게 발표함.</td>
+                            <td>도덕적 관점에서 도덕 AI를 소개하고, 조건에 맞추어 발표함.</td>
+                            <td>도덕적 관점에서 도덕 AI를 소개하지 못하거나, 발표가 미흡함.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
-        <!-- 학습 역량 섹션 -->
-        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-10">
-            <div class="bg-white/5 p-4 rounded-3xl text-center border border-white/10">
-                <div class="text-2xl mb-1">🧩</div>
-                <p class="text-xs font-bold text-indigo-200">포트폴리오</p>
+        <!-- 평가 방법 안내 -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-10 text-center">
+            <div class="bg-white/5 p-5 rounded-3xl border border-white/10">
+                <div class="text-3xl mb-2">🧩</div>
+                <p class="text-sm font-bold text-indigo-200">관찰 평가</p>
             </div>
-            <div class="bg-white/5 p-4 rounded-3xl text-center border border-white/10">
-                <div class="text-2xl mb-1">👁️</div>
-                <p class="text-xs font-bold text-indigo-200">관찰 평가</p>
+            <div class="bg-white/5 p-5 rounded-3xl border border-white/10">
+                <div class="text-3xl mb-2">🌟</div>
+                <p class="text-sm font-bold text-indigo-200">창의성</p>
             </div>
-            <div class="bg-white/5 p-4 rounded-3xl text-center border border-white/10">
-                <div class="text-2xl mb-1">👥</div>
-                <p class="text-xs font-bold text-indigo-200">동료 평가</p>
+            <div class="bg-white/5 p-5 rounded-3xl border border-white/10">
+                <div class="text-3xl mb-2">👥</div>
+                <p class="text-sm font-bold text-indigo-200">동료 평가</p>
             </div>
-            <div class="bg-white/5 p-4 rounded-3xl text-center border border-white/10">
-                <div class="text-2xl mb-1">✍️</div>
-                <p class="text-xs font-bold text-indigo-200">자기 평가</p>
+            <div class="bg-white/5 p-5 rounded-3xl border border-white/10">
+                <div class="text-3xl mb-2">👄</div>
+                <p class="text-sm font-bold text-indigo-200">유창성</p>
             </div>
         </section>
 
@@ -334,12 +321,12 @@
     </div>
 
     <!-- Toast 알림 -->
-    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[110] bg-indigo-900/90 backdrop-blur px-6 py-3 rounded-full shadow-xl border border-indigo-500/50 opacity-0 translate-y-4 pointer-events-none">
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[110] bg-indigo-900/90 backdrop-blur px-6 py-3 rounded-full shadow-xl border border-indigo-500/50 opacity-0 translate-y-4 pointer-events-none transition-all duration-300">
         <p id="toast-msg" class="text-sm font-bold text-indigo-200"></p>
     </div>
 
     <footer class="mt-12 pb-12 text-center text-gray-500 font-gaegu text-xl">
-        <p>© 2026 의리T의 도덕 클래스 | 미래를 만드는 윤리 수업 🌱</p>
+        <p>© 2026 의리T의 함께 도덕 | 함께 성장하는 즐거움 🌱</p>
     </footer>
 
     <script>
