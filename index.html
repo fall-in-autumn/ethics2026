@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>열네 살, 나의 이야기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #f472b6;
+        }
+
+        body {
+            font-family: 'Inter', 'Gaegu', sans-serif;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .font-gaegu { font-family: 'Gaegu', cursive; }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #6366f1, #a855f7, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .blob {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.2) 0%, rgba(244, 114, 182, 0.2) 100%);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* Interactive stars */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center p-4">
+
+    <div id="blob1" class="blob" style="top: 10%; left: 10%;"></div>
+    <div id="blob2" class="blob" style="bottom: 10%; right: 10%;"></div>
+    <div id="star-container"></div>
+
+    <main class="max-w-4xl w-full text-center z-10">
+        <header class="mb-12 floating">
+            <h2 class="text-2xl md:text-3xl font-gaegu text-gray-600 mb-2">도덕 수업: 나를 찾아가는 여정</h2>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                <span class="gradient-text">열네 살,</span> <br>
+                나의 이야기를 기록하다
+            </h1>
+            <p class="text-gray-500 text-lg md:text-xl max-w-lg mx-auto">
+                가장 소중한 보물은 바로 '나' 자신입니다. <br>
+                여러분의 반짝이는 순간들을 하나씩 채워보세요.
+            </p>
+        </header>
+
+        <div class="flex flex-col items-center gap-8">
+            <a href="./01/index.html" 
+               class="group relative inline-flex items-center justify-center px-10 py-6 font-bold text-white transition-all duration-200 bg-indigo-600 font-pj rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 card-hover text-2xl shadow-xl overflow-hidden">
+                <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500"></span>
+                <span class="relative flex items-center gap-3">
+                    🚀 열네 살 자서전 포트폴리오
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 animate-bounce-x" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </span>
+            </a>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-12">
+                <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl card-hover border border-white/50 cursor-default">
+                    <div class="text-4xl mb-4">🌟</div>
+                    <h3 class="text-xl font-bold mb-2">나의 가치</h3>
+                    <p class="text-sm text-gray-500">내가 가장 중요하게 생각하는 것은 무엇일까요?</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl card-hover border border-white/50 cursor-default">
+                    <div class="text-4xl mb-4">🌱</div>
+                    <h3 class="text-xl font-bold mb-2">성장 일기</h3>
+                    <p class="text-sm text-gray-500">매일 조금씩 성장하는 나의 모습을 기록해요.</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl card-hover border border-white/50 cursor-default">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="text-xl font-bold mb-2">꿈 스케치</h3>
+                    <p class="text-sm text-gray-500">나중에 나는 어떤 사람이 되어 있을까요?</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 text-gray-400 text-sm">
+        <p>© 2024 열네 살 자서전 프로젝트 | 도덕 수업의 즐거움</p>
+    </footer>
+
+    <script>
+        // Create random stars in the background
+        const starContainer = document.getElementById('star-container');
+        const starCount = 50;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 4 + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animation = `pulse ${Math.random() * 3 + 2}s infinite alternate`;
+            starContainer.appendChild(star);
+        }
+
+        // Add mouse movement effect to blobs
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const blob1 = document.getElementById('blob1');
+            const blob2 = document.getElementById('blob2');
+            
+            blob1.style.transform = `translate(${x * 50}px, ${y * 50}px)`;
+            blob2.style.transform = `translate(${-x * 50}px, ${-y * 50}px)`;
+        });
+
+        const btn = document.querySelector('a');
+        btn.addEventListener('mouseover', () => {
+            // Visual feedback on hover is handled by CSS, but we could add sound or extra JS effects here
+        });
+    </script>
+
+    <style>
+        @keyframes pulse {
+            from { opacity: 0.2; transform: scale(1); }
+            to { opacity: 0.8; transform: scale(1.5); }
+        }
+        
+        .animate-bounce-x {
+            animation: bounce-x 1s infinite;
+        }
+
+        @keyframes bounce-x {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+    </style>
+</body>
+</html>
