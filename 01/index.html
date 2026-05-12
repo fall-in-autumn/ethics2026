@@ -15,7 +15,6 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
-        /* 가독성을 위해 자간 및 행간 조정 */
         p { line-height: 1.7; letter-spacing: -0.01em; }
     </style>
 </head>
@@ -28,8 +27,14 @@
                 <h1 class="text-3xl font-black tracking-tight text-slate-900">오늘의 도덕 수업</h1>
             </div>
             <div class="flex gap-3">
-                <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-xl text-sm font-bold border border-blue-200">1학년 1학기</span>
-                <span class="bg-purple-100 text-purple-700 px-4 py-2 rounded-xl text-sm font-bold border border-purple-200">자유학기제 기록ing</span>
+                <!-- 홈으로 가기 버튼: 아이콘 추가 및 스타일 수정 -->
+                <a href="index.html" class="flex items-center gap-2 bg-blue-100 text-blue-700 px-5 py-2.5 rounded-xl text-base font-bold border border-blue-200 hover:bg-blue-200 transition-all active:scale-95 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                    홈으로 가기
+                </a>
+                <span class="bg-purple-100 text-purple-700 px-4 py-2 rounded-xl text-sm font-bold border border-purple-200 flex items-center">자유학기제 기록ing</span>
             </div>
         </div>
     </header>
@@ -68,7 +73,6 @@
             </h3>
 
             <div class="space-y-6">
-                <!-- Group A: Master -->
                 <div class="group bg-white border-4 border-transparent hover:border-blue-500 p-8 rounded-[2.5rem] shadow-xl transition-all cursor-pointer overflow-hidden relative active:scale-95">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
                         <div class="flex-1">
@@ -89,7 +93,6 @@
                     </div>
                 </div>
 
-                <!-- Group B: New Start -->
                 <div class="group bg-white border-4 border-transparent hover:border-emerald-500 p-8 rounded-[2.5rem] shadow-xl transition-all cursor-pointer overflow-hidden relative active:scale-95">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
                         <div class="flex-1">
@@ -116,9 +119,12 @@
             <div class="relative z-10">
                 <h3 class="text-sm font-black uppercase tracking-[0.3em] mb-4 opacity-80 underline underline-offset-8 decoration-indigo-400">COMING NEXT WEEK</h3>
                 <h4 class="text-4xl md:text-5xl font-black mb-8 leading-tight">하브루타 모둠별 토론 🤝</h4>
-                <p class="text-indigo-100 text-xl md:text-2xl mb-10 leading-relaxed font-medium">
+                <p class="text-indigo-100 text-xl md:text-2xl mb-10 font-medium leading-[2.2]">
                     오늘 정성껏 만든 카드는 다음 시간의 <span class="text-white font-black underline decoration-yellow-400 decoration-4">강력한 무기</span>가 됩니다!<br>
-                    활동 결과를 바탕으로 <span class="bg-white text-indigo-900 px-3 py-1 rounded-xl font-black mx-1">수행평가 토론 모둠</span>이 구성됩니다.
+                    활동 결과를 바탕으로 
+                    <!-- 강조 박스 크기 수정: py-0.5로 높이 조절 및 inline-block 적용하여 겹침 방지 -->
+                    <span class="inline-block bg-white text-indigo-900 px-3 py-0.5 rounded-lg font-black mx-1 align-middle">수행평가 토론 모둠</span>
+                    이 구성됩니다.
                 </p>
                 <div class="flex items-center gap-3 text-lg md:text-xl font-black">
                     <div class="w-4 h-4 bg-yellow-400 rounded-full animate-ping"></div>
@@ -144,7 +150,6 @@
         document.querySelectorAll('.group').forEach(card => {
             card.addEventListener('click', () => {
                 const title = card.querySelector('h4').innerText;
-                // 클릭 시 피드백 애니메이션
                 card.style.transform = 'scale(0.98)';
                 setTimeout(() => {
                     card.style.transform = '';
