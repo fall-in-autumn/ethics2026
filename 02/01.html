@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도덕 AI 프로젝트 - 수행평가 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #0ea5e9;
+            --accent: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 50%, #020617 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #f8fafc;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .font-gaegu { font-family: 'Gaegu', cursive; }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+        }
+
+        .ai-pulse {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(99, 102, 241, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.7); }
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(16px);
+        }
+
+        .step-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .step-card:hover {
+            transform: translateY(-8px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #a5b4fc;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+        }
+        .nav-icon-btn:hover {
+            background-color: #6366f1;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* 메인 버튼 스타일 수정: 너비는 글자에 맞게, 글자는 크게 */
+        .main-step-btn {
+            width: fit-content; 
+            min-width: 120px;
+            min-height: auto;
+            font-family: 'Gaegu', cursive;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8px 20px;
+        }
+
+        .sub-btn {
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            transition: all 0.2s;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .sub-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: #6366f1;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        th {
+            background: rgba(99, 102, 241, 0.25);
+            color: #a5b4fc;
+            padding: 16px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        td {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        tr:last-child td { border-bottom: none; }
+        .eval-factor { font-weight: bold; color: #fff; background: rgba(255,255,255,0.05); width: 100px; text-align: center; vertical-align: middle; }
+    </style>
+</head>
+<body class="p-4 md:p-8 relative">
+
+    <!-- Background Elements -->
+    <div class="absolute top-[-100px] right-[-100px] w-[500px] h-[500px] bg-indigo-600/20 blur-[80px] rounded-full -z-10"></div>
+    <div class="absolute bottom-[-100px] left-[-100px] w-[500px] h-[500px] bg-blue-600/10 blur-[80px] rounded-full -z-10"></div>
+
+    <nav class="absolute top-6 left-6 z-50 flex gap-3">
+        <!-- 메뉴 버튼 -->
+        <div class="nav-icon-btn shadow-sm" title="메뉴" onclick="showToast('메뉴 기능을 준비 중입니다.')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </div>
+        <!-- 홈 버튼: SyntaxError 수정을 위해 <a> 태그 사용 -->
+        <a href="../index.html" class="nav-icon-btn shadow-sm" title="홈으로 가기">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+        </a>
+    </nav>
+
+    <header class="max-w-4xl mx-auto text-center mb-16 pt-12 floating">
+        <div class="inline-block bg-indigo-900/40 backdrop-blur-sm px-6 py-2 rounded-full mb-4 shadow-sm border border-indigo-500/30">
+            <span class="text-indigo-300 font-bold text-sm flex items-center gap-2">
+                함께 도덕 수행평가
+            </span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-gaegu font-bold mb-6 text-white tracking-tight drop-shadow-lg">
+            도덕 AI 프로젝트
+        </h1>
+        <p class="font-gaegu text-2xl text-indigo-300 font-medium">인공지능에 도덕의 숨결을 불어넣는 창조적 여정</p>
+    </header>
+
+    <main class="max-w-5xl mx-auto space-y-10 relative z-10">
+
+        <section class="glass-panel rounded-[2.5rem] p-8 md:p-10 card-shadow">
+            <div class="flex items-center mb-10">
+                <div class="bg-indigo-600 p-3 rounded-2xl mr-4 shadow-lg ai-pulse">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 21h6l-.75-4M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-white">단계별 수행평가 과제</h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- 1단계 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 p-6 rounded-3xl bg-white/5 border border-white/10 step-card">
+                    <div class="main-step-btn bg-indigo-600 text-white rounded-2xl font-bold shadow-md text-3xl shrink-0">
+                        1단계
+                    </div>
+                    <div class="flex flex-col justify-center w-full">
+                        <p class="text-base text-indigo-100 font-bold mb-3 px-2">도덕의 필요성을 이해하고, 도덕적 관점에서 도덕 AI 기획하기</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="sub-btn">🤖 도덕의 필요성 이해</button>
+                            <button class="sub-btn">📝 도덕 가이드 작성하기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2단계 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 p-6 rounded-3xl bg-white/5 border border-white/10 step-card">
+                    <div class="main-step-btn bg-blue-600 text-white rounded-2xl font-bold shadow-md text-3xl shrink-0">
+                        2단계
+                    </div>
+                    <div class="flex flex-col justify-center w-full">
+                        <p class="text-base text-blue-100 font-bold mb-3 px-2">도덕적 문제를 해결할 수 있는 도덕 AI 제작하기</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="sub-btn">🔍 비도덕적 행동 원인 분석</button>
+                            <button class="sub-btn">🛠️ 도덕 AI 제작하기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3단계 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 p-6 rounded-3xl bg-white/5 border border-white/10 step-card">
+                    <div class="main-step-btn bg-emerald-600 text-white rounded-2xl font-bold shadow-md text-3xl shrink-0">
+                        3단계
+                    </div>
+                    <div class="flex flex-col justify-center w-full">
+                        <p class="text-base text-emerald-100 font-bold mb-3 px-2">도덕 AI 프로젝트 결과 발표 및 동료 평가, 자기 성찰하기</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="sub-btn">📢 프로젝트 발표</button>
+                            <button class="sub-btn">🌿 성찰하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel rounded-[2.5rem] p-8 md:p-10 card-shadow">
+            <div class="flex items-center mb-10">
+                <div class="bg-amber-500 p-3 rounded-2xl mr-4 shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-white">수행평가 채점기준표</h2>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th>평가 단계</th>
+                            <th class="bg-indigo-600/30 text-white">상</th>
+                            <th class="bg-slate-600/30 text-slate-200">중</th>
+                            <th class="bg-amber-800/30 text-amber-200">하</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="eval-factor">1단계</td>
+                            <td>도덕의 필요성을 이해하고 이를 예로 들어 설명할 수 있으며, 도덕적 관점에서 도덕 AI 제작을 위한 도덕 가이드를 성실히 작성함. </td>
+                            <td>도덕의 필요성을 설명할 수 있으며, 도덕적 관점에서 도덕 AI 제작을 위한 도덕 가이드를 작성함. </td>
+                            <td>도덕 AI 제작을 위한 도덕 가이드를 도덕적 관점에서 작성하지 못하거나, 미흡함.</td>
+                        </tr>
+                        <tr>
+                            <td class="eval-factor">2단계</td>
+                            <td>도덕적 관점에서 창의적이고 완성도 높은 도덕적인 행동을 하는 도덕 AI를 성실히 제작함.</td>
+                            <td>도덕적 관점에서 도덕적인 행동을 하는 도덕 AI를 제작함.</td>
+                            <td>도덕적인 행동을 하는 도덕 AI를 도덕적 관점에서 제작하지 못하거나, 완성도가 미흡함.</td>
+                        </tr>
+                        <tr>
+                            <td class="eval-factor">3단계</td>
+                            <td>도덕적 관점에서 도덕 AI를 구체적으로 소개하고, 조건에 맞추어 자신 있게 발표함.</td>
+                            <td>도덕적 관점에서 도덕 AI를 소개하고, 조건에 맞추어 발표함.</td>
+                            <td>도덕적 관점에서 도덕 AI를 소개하지 못하거나, 발표가 미흡함.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Evaluation Method Guidance -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-10 text-center">
+            <div class="bg-white/5 p-5 rounded-3xl border border-white/10">
+                <div class="text-3xl mb-2">🧩</div>
+                <p class="text-sm font-bold text-indigo-200">관찰 평가</p>
+            </div>
+            <div class="bg-white/5 p-5 rounded-3xl border border-white/10">
+                <div class="text-3xl mb-2">🌟</div>
+                <p class="text-sm font-bold text-indigo-200">창의성</p>
+            </div>
+            <div class="bg-white/5 p-5 rounded-3xl border border-white/10">
+                <div class="text-3xl mb-2">👥</div>
+                <p class="text-sm font-bold text-indigo-200">동료 평가</p>
+            </div>
+            <div class="bg-white/5 p-5 rounded-3xl border border-white/10">
+                <div class="text-3xl mb-2">👄</div>
+                <p class="text-sm font-bold text-indigo-200">유창성</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[110] bg-indigo-900/90 backdrop-blur px-6 py-3 rounded-full shadow-xl border border-indigo-500/50 opacity-0 translate-y-4 pointer-events-none transition-all duration-300">
+        <p id="toast-msg" class="text-sm font-bold text-indigo-200"></p>
+    </div>
+
+    <footer class="mt-12 pb-12 text-center text-gray-500 font-gaegu text-xl">
+        <p>© 2026 의리T의 함께 도덕 | 함께 성장하는 즐거움 🌱</p>
+    </footer>
+
+    <script>
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            
+            toastMsg.innerText = msg;
+            toast.classList.remove('opacity-0', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-4');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
